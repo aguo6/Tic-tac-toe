@@ -9,7 +9,11 @@ public class arrayBoard
 {
     public arrayBoard()
     {
-        Player [][] arrayBoard = new Player [3][3];
+        Space [][] arrayBoard = new Space [3][3];
     }
     
+    public void placePiece()
+    {
+        
+    }
 }
