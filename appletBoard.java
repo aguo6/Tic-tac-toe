@@ -5,12 +5,33 @@
  * @author (your name) 
  * @version (a version number or a date)
  * 
- * Help from Mr. Sikora's C.S. google website's examples
+ * Help from Mr. Sikora's C.S. google website's examples & comments from Mr. Sikora's example code
  */
-import java.awt.*; //buttons, animation, mouse
+import java.awt.*; //abstract window toolkit
+import java.awt.event.*; //buttons, animation, mouse
 import java.applet.Applet; //To run an applet
-public class appletBoard extends Applet
+public class appletBoard extends Applet implements ActionListener
 {
+    private Button clickSpace;
+    
+    
+    public void initializeButtons()
+    {
+        //3 steps to create a button
+        clickSpace = 
+        add(clickSpace);
+        clickSpace.addActionListener(this);
+    }
+    
+    public void actionPerformed(ActionEvent ae)
+    {
+        Object source = ae.getSource(); // method event within ActionEvent which gets source of event
+        if (source.equals(clickSpace))
+        {
+            
+        }
+    }
+    
     public void paint(Graphics g)
     {
         // 4-lines of tic-tac-toe
@@ -29,13 +50,9 @@ public class appletBoard extends Applet
         }
     }
     
-    
-    
-    
     public void playerPieces (Graphics g)
     {
         
     }
-    
     
 }
