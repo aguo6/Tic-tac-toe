@@ -24,4 +24,14 @@ public class Space
     {
         return (isBlank);
     }
+    
+    public void setPlayer(int playerNum)
+    {
+        playerNum = playerPiece;
+    }
+    
+    public void setBlank(boolean setBlank)
+    {
+        setBlank = isBlank;
+    }
 }
