@@ -9,7 +9,7 @@
  */
 import java.awt.*; //buttons, animation, mouse
 import java.applet.Applet; //To run an applet
-public class appletBoard
+public class appletBoard extends Applet
 {
     public void paint(Graphics g)
     {
@@ -20,9 +20,13 @@ public class appletBoard
         g.drawLine(0,332,498,332);
         
         // 9 Rectangle Spaces
-        
-        
-        
+        for (int x = 0; x<= 498; x+= 166)
+        {
+            for (int y = 0; y<= 498; y+= 166)
+            {
+                g.drawRect(x, y,165, 165); //(topLeftCords,length,width)
+            }
+        }
     }
     
     
