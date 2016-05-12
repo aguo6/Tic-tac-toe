@@ -20,9 +20,9 @@ public class appletBoard extends Applet
         g.drawLine(0,332,498,332);
         
         // 9 Rectangle Spaces
-        for (int x = 0; x<= 498; x+= 166)
+        for (int x = 0; x<= 334; x+= 167)
         {
-            for (int y = 0; y<= 498; y+= 166)
+            for (int y = 0; y<= 334 ; y+= 167)
             {
                 g.drawRect(x, y,165, 165); //(topLeftCords,length,width)
             }
