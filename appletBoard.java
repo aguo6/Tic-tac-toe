@@ -4,8 +4,11 @@
  * 
  * @author (your name) 
  * @version (a version number or a date)
+ * 
+ * Help from Mr. Sikora's C.S. google website's examples
  */
-import java.awt.*;
+import java.awt.*; //buttons, animation, mouse
+import java.applet.Applet; //To run an applet
 public class appletBoard
 {
     public void paint(Graphics g)
@@ -15,6 +18,8 @@ public class appletBoard
         g.drawLine(332,0,332,500);
         g.drawLine(0,166,498,166);
         g.drawLine(0,332,498,332);
+        
+        // 9 Rectangle Spaces
         
         
         
