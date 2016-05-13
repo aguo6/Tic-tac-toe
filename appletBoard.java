@@ -25,15 +25,21 @@ public class appletBoard extends Applet implements ActionListener
     public void init()
     {
         //3 steps to create a button
-        leftMove = new Button ("left");
+        leftMove = new Button ("Left");
         add(leftMove);
         leftMove.addActionListener(this);
         
-        rightMove = new Button ("right");
+        rightMove = new Button ("Right");
         add(rightMove);
         rightMove.addActionListener(this);
 
-
+        upMove = new Button ("Up");
+        add(upMove);
+        upMove.addActionListener(this);
+        
+        downMove = new Button ("Down");
+        add(downMove);
+        downMove.addActionListener(this);
     }
     
     public void actionPerformed(ActionEvent ae)
@@ -46,6 +52,14 @@ public class appletBoard extends Applet implements ActionListener
         else if (source.equals(rightMove))
         {
             move = 2;
+        }
+        else if (source.equals(upMove))
+        {
+            move = 3;
+        }
+        else if (source.equals(downMove))
+        {
+            move = 4;
         }
         repaint();
     }
@@ -65,7 +79,7 @@ public class appletBoard extends Applet implements ActionListener
         {
             for (int y = 0; y<= 334 ; y+= 167)
             {
-                g.drawRect(x, y,165, 165); //(topLeftCords,length,width)
+                g.drawRect(x, y,164, 164); //(topLeftCords,length,width)
             }
         }
         
@@ -87,11 +101,25 @@ public class appletBoard extends Applet implements ActionListener
             g.setColor(Color.orange);
             g.fillOval(xMove,yMove,30,30);
         }
-    }
-    
-    public void playerPieces (Graphics g)
-    {
+        else if (move == 3)
+        {
+            g.setColor(Color.white);
+            g.fillOval(xMove,yMove,30,30);
+            yMove = yMove - 166;
+            g.setColor(Color.orange);
+            g.fillOval(xMove,yMove,30,30);
+        }
+        else if (move == 4)
+        {
+            g.setColor(Color.white);
+            g.fillOval(xMove,yMove,30,30);
+            yMove = yMove + 166;
+            g.setColor(Color.orange);
+            g.fillOval(xMove,yMove,30,30);
+        }
+        else
+        {
+        }
         
     }
-    
 }
