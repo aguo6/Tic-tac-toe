@@ -5,35 +5,55 @@
  * @author (your name) 
  * @version (a version number or a date)
  * 
- * Help from Mr. Sikora's C.S. google website's examples & comments from Mr. Sikora's example code
+ * Lots of help from Mr. Sikora's C.S. google website's examples & comments from Mr. Sikora's example code
+ * Asked (Mr. Gumminger) for help on implementing click-able squares
  */
 import java.awt.*; //abstract window toolkit
 import java.awt.event.*; //buttons, animation, mouse
 import java.applet.Applet; //To run an applet
 public class appletBoard extends Applet implements ActionListener
 {
-    private Button clickSpace;
+    private Button leftMove;
+    private Button rightMove;
+    private Button upMove;
+    private Button downMove;
+    private int xMove = 167;
+    private int yMove = 167;
+    private int move = 0;
     
     
-    public void initializeButtons()
+    public void init()
     {
         //3 steps to create a button
-        clickSpace = 
-        add(clickSpace);
-        clickSpace.addActionListener(this);
+        leftMove = new Button ("left");
+        add(leftMove);
+        leftMove.addActionListener(this);
+        
+        rightMove = new Button ("right");
+        add(rightMove);
+        rightMove.addActionListener(this);
+
+
     }
     
     public void actionPerformed(ActionEvent ae)
     {
         Object source = ae.getSource(); // method event within ActionEvent which gets source of event
-        if (source.equals(clickSpace))
+        if (source.equals(leftMove))
         {
-            
+            move = 1;
         }
+        else if (source.equals(rightMove))
+        {
+            move = 2;
+        }
+        repaint();
     }
     
     public void paint(Graphics g)
     {
+        setBackground(Color.white);
+        
         // 4-lines of tic-tac-toe
         g.drawLine(166,0,166,500);
         g.drawLine(332,0,332,500);
@@ -47,6 +67,25 @@ public class appletBoard extends Applet implements ActionListener
             {
                 g.drawRect(x, y,165, 165); //(topLeftCords,length,width)
             }
+        }
+        
+        
+        g.setColor(Color.orange);
+        g.fillOval(xMove,yMove,30,30);
+        if(move == 1){
+            g.setColor(Color.white);
+            g.fillOval(xMove,yMove,30,30);
+            xMove = xMove - 166;
+            g.setColor(Color.orange);
+            g.fillOval(xMove,yMove,30,30);
+        }
+        else if (move == 2)
+        {
+            g.setColor(Color.white);
+            g.fillOval(xMove,yMove,30,30);
+            xMove = xMove + 166;
+            g.setColor(Color.orange);
+            g.fillOval(xMove,yMove,30,30);
         }
     }
     
