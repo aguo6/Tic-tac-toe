@@ -6,22 +6,31 @@
  * @version (a version number or a date)
  * 
  * Lots of help from Mr. Sikora's C.S. google website's examples & comments from Mr. Sikora's example code
- * Asked (Mr. Gumminger) for help on implementing click-able squares
+ * 
+ * Asked (Mr. Gumminger) for help on implementing click-able squares:
+ * Create Square/piece class
+ * mouseListener (for position of click)
+ * if click is within square => call player piece
+ * 
+ * mouseListener Help from oracle Java Documentation Tutorial
+ * 
  */
 import java.awt.*; //abstract window toolkit
 import java.awt.event.*; //buttons, animation, mouse
 import java.applet.Applet; //To run an applet
-public class appletBoard extends Applet implements ActionListener
+public class appletBoard extends Applet implements ActionListener //implements MouseListener 
 {
     private Button leftMove;
     private Button rightMove;
     private Button upMove;
     private Button downMove;
+    private Button placePiece;
     private int xMove = 167;
     private int yMove = 167;
     private int move = 0;
+    private int playerNum = 1;
     
-    
+     
     public void init()
     {
         //3 steps to create a button
@@ -40,6 +49,11 @@ public class appletBoard extends Applet implements ActionListener
         downMove = new Button ("Down");
         add(downMove);
         downMove.addActionListener(this);
+        
+        placePiece = new Button ("Place");
+        add(placePiece);
+        placePiece.addActionListener(this);
+        
     }
     
     public void actionPerformed(ActionEvent ae)
@@ -61,8 +75,22 @@ public class appletBoard extends Applet implements ActionListener
         {
             move = 4;
         }
+        else if (source.equals(placePiece))
+        {
+            move = 5;
+        }
         repaint();
     }
+    
+    //     public int mouseClickedX (MouseEvent e)
+    //     {
+    //         return(e.getXOnScreen());
+    //     }
+    //         
+    //     public int mouseClickedY (MouseEvent e)
+    //     {
+    //         return(e.getXOnScreen());
+    //     }
     
     public void paint(Graphics g)
     {
@@ -117,9 +145,30 @@ public class appletBoard extends Applet implements ActionListener
             g.setColor(Color.orange);
             g.fillOval(xMove,yMove,30,30);
         }
-        else
+        else if (move == 5)
         {
+            playerPiece piece = new playerPiece();
+            g.setColor(Color.black);
+            if (playerNum%2 == 0)
+            {
+                piece.drawCross(g);
+            }
+            else
+            {
+                piece.drawCircle(g);
+            }
+            playerNum++;
         }
         
+    }
+    
+    public int getXPos()
+    {
+        return (xMove);
+    }
+    
+    public int getYPos()
+    {
+        return (yMove);
     }
 }
