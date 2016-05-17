@@ -17,6 +17,7 @@ public class playerPiece
     
     public void drawCross(Graphics g)
     {
+        g.setColor(Color.blue);
         appletBoard selectedSpace = new appletBoard();
         centerX = selectedSpace.getXPos() + 83;
         centerY = selectedSpace.getYPos() + 83;
@@ -26,6 +27,7 @@ public class playerPiece
     
     public void drawCircle(Graphics g)
     {
+        g.setColor(Color.red);
         appletBoard selectedSpace = new appletBoard();
         centerX = selectedSpace.getXPos() + 83;
         centerY = selectedSpace.getYPos() + 83;
