@@ -117,7 +117,8 @@ public class appletBoard extends Applet implements ActionListener //implements M
         if(move == 1){
             g.setColor(Color.white);
             g.fillOval(xMove,yMove,30,30);
-            xMove = xMove - 166;
+            if (xMove >= 166)
+                xMove = xMove - 166;
             g.setColor(Color.orange);
             g.fillOval(xMove,yMove,30,30);
         }
@@ -125,7 +126,8 @@ public class appletBoard extends Applet implements ActionListener //implements M
         {
             g.setColor(Color.white);
             g.fillOval(xMove,yMove,30,30);
-            xMove = xMove + 166;
+            if (xMove <= 332)
+                xMove = xMove + 166;
             g.setColor(Color.orange);
             g.fillOval(xMove,yMove,30,30);
         }
@@ -133,7 +135,8 @@ public class appletBoard extends Applet implements ActionListener //implements M
         {
             g.setColor(Color.white);
             g.fillOval(xMove,yMove,30,30);
-            yMove = yMove - 166;
+            if (yMove >= 166)
+                yMove = yMove - 166;
             g.setColor(Color.orange);
             g.fillOval(xMove,yMove,30,30);
         }
@@ -141,7 +144,8 @@ public class appletBoard extends Applet implements ActionListener //implements M
         {
             g.setColor(Color.white);
             g.fillOval(xMove,yMove,30,30);
-            yMove = yMove + 166;
+            if (yMove <= 332)
+                yMove = yMove + 166;
             g.setColor(Color.orange);
             g.fillOval(xMove,yMove,30,30);
         }
