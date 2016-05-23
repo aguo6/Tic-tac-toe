@@ -25,12 +25,19 @@ public class appletBoard extends Applet implements ActionListener //implements M
     private Button upMove;
     private Button downMove;
     private Button placePiece;
-    private int xMove = 167;
-    private int yMove = 167;
+    public static int xMove = 167;
+    public static int yMove = 167;
     private int move = 0;
     private int playerNum = 1;
     
-     
+    
+    Space clickSpace = new Space();
+    
+    private int col;
+    private int row;
+    
+    arrayBoard compBoard = new arrayBoard();
+    
     public void init()
     {
         //3 steps to create a button
@@ -149,21 +156,36 @@ public class appletBoard extends Applet implements ActionListener //implements M
             g.setColor(Color.orange);
             g.fillOval(xMove,yMove,30,30);
         }
-        else if (move == 5)
+        else if (move == 5) // "place"
         {
             playerPiece piece = new playerPiece();
             g.setColor(Color.black);
             if (playerNum%2 == 0)
             {
                 piece.drawCross(g);
+                clickSpace.setPlayer(1);
+                clickSpace.setBlank(false);
+                row = getRow(xMove);
+                col = getCol(yMove);
+                compBoard.setPiece(row, col, clickSpace);
             }
             else
             {
                 piece.drawCircle(g);
+                clickSpace.setPlayer(2);
+                clickSpace.setBlank(false);
+                row = getRow(xMove);
+                col = getCol(yMove);
+                compBoard.setPiece(row, col, clickSpace);
             }
             playerNum++;
         }
-        
+        /*if (compBoard.checkWin())
+        {
+            //exit
+        }
+        */  
+       
     }
     
     public int getXPos()
@@ -174,5 +196,27 @@ public class appletBoard extends Applet implements ActionListener //implements M
     public int getYPos()
     {
         return (yMove);
+    }
+    
+    public int getRow(int xCord)
+    {
+        if (xCord == 332)
+            row = 2;
+        else if (xCord == 166)
+            row = 1;
+        else if (xCord == 0)
+            row = 0;
+        return (row);
+    }
+    
+    public int getCol(int yCord)
+    {
+        if (yCord == 332)
+            col = 2;
+        else if (yCord == 166)
+            col = 1;
+        else if (yCord == 0)
+            col = 0;
+        return (col);
     }
 }

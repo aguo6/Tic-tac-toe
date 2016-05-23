@@ -7,23 +7,20 @@
  */
 public class arrayBoard
 {
-    private Space [] [] arrayBoard;
+    public static Space [][] arrayBoard;
     public arrayBoard()
     {
         arrayBoard = new Space [3][3];
     }
     
-    public void placePiece(Space clickedSpace, int playerNum)
+    public void setPiece(int row, int col, Space clickedSpace)
     {
-        if ((!clickedSpace.isBlank()) && (clickedSpace.getPlayer() != 0))
-        {
-            clickedSpace.setPlayer(playerNum);
-            clickedSpace.setBlank(false);
-        }
+        arrayBoard[row][col] = clickedSpace;
     }
+
     
     
-     public boolean checkWin ()
+    public boolean checkWin()
     {
          boolean win = false;
  
