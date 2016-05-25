@@ -28,9 +28,10 @@ public class Space
     public void setPlayer(int playerNum)
     {
         playerNum = playerPiece;
+        setBlank(false);
     }
     
-    public void setBlank(boolean setBlank)
+    private void setBlank(boolean setBlank)
     {
         setBlank = isBlank;
     }

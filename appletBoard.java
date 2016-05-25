@@ -31,12 +31,15 @@ public class appletBoard extends Applet implements ActionListener //implements M
     private int playerNum = 1;
     
     
-    Space clickSpace = new Space();
+    private Space clickSpace = new Space();
     
     private int col;
     private int row;
     
-    arrayBoard compBoard = new arrayBoard();
+    private arrayBoard compBoard = new arrayBoard();
+    private playerPiece piece = new playerPiece();
+    
+    private boolean win = false;
     
     public void init()
     {
@@ -60,7 +63,6 @@ public class appletBoard extends Applet implements ActionListener //implements M
         placePiece = new Button ("Place");
         add(placePiece);
         placePiece.addActionListener(this);
-        
     }
     
     public void actionPerformed(ActionEvent ae)
@@ -101,92 +103,120 @@ public class appletBoard extends Applet implements ActionListener //implements M
     
     public void paint(Graphics g)
     {
-        setBackground(Color.white);
-        
-        // 4-lines of tic-tac-toe
-        g.drawLine(166,0,166,500);
-        g.drawLine(332,0,332,500);
-        g.drawLine(0,166,498,166);
-        g.drawLine(0,332,498,332);
-        
-        // 9 Rectangle Spaces
-        for (int x = 0; x<= 334; x+= 167)
-        {
-            for (int y = 0; y<= 334 ; y+= 167)
+        //while (win == false)
+        //{
+            setBackground(Color.white);
+            
+            // 4-lines of tic-tac-toe
+            g.drawLine(166,0,166,500);
+            g.drawLine(332,0,332,500);
+            g.drawLine(0,166,498,166);
+            g.drawLine(0,332,498,332);
+            
+            // 9 Rectangle Spaces
+            for (int x = 0; x<= 334; x+= 167)
             {
-                g.drawRect(x, y,164, 164); //(topLeftCords,length,width)
+                for (int y = 0; y<= 334 ; y+= 167)
+                {
+                    g.drawRect(x, y,164, 164); //(topLeftCords,length,width)
+                }
             }
-        }
-        
-        
-        g.setColor(Color.orange);
-        g.fillOval(xMove,yMove,30,30);
-        if(move == 1){
-            g.setColor(Color.white);
-            g.fillOval(xMove,yMove,30,30);
-            if (xMove >= 166)
-                xMove = xMove - 166;
+            
+            //"cursor"
             g.setColor(Color.orange);
             g.fillOval(xMove,yMove,30,30);
-        }
-        else if (move == 2)
-        {
-            g.setColor(Color.white);
-            g.fillOval(xMove,yMove,30,30);
-            if (xMove <= 332)
-                xMove = xMove + 166;
-            g.setColor(Color.orange);
-            g.fillOval(xMove,yMove,30,30);
-        }
-        else if (move == 3)
-        {
-            g.setColor(Color.white);
-            g.fillOval(xMove,yMove,30,30);
-            if (yMove >= 166)
-                yMove = yMove - 166;
-            g.setColor(Color.orange);
-            g.fillOval(xMove,yMove,30,30);
-        }
-        else if (move == 4)
-        {
-            g.setColor(Color.white);
-            g.fillOval(xMove,yMove,30,30);
-            if (yMove <= 332)
-                yMove = yMove + 166;
-            g.setColor(Color.orange);
-            g.fillOval(xMove,yMove,30,30);
-        }
-        else if (move == 5) // "place"
-        {
-            playerPiece piece = new playerPiece();
-            g.setColor(Color.black);
-            if (playerNum%2 == 0)
+            
+            //Button options
+            if(move == 1) //Moves cursor left 1 space
             {
-                piece.drawCross(g);
-                clickSpace.setPlayer(1);
-                clickSpace.setBlank(false);
-                row = getRow(xMove);
-                col = getCol(yMove);
-                compBoard.setPiece(row, col, clickSpace);
+                g.setColor(Color.white);
+                g.fillOval(xMove,yMove,30,30);
+                if (xMove >= 166)
+                    xMove = xMove - 166;
+                g.setColor(Color.orange);
+                g.fillOval(xMove,yMove,30,30);
             }
-            else
+            else if (move == 2) //Moves cursor right 1 space
             {
-                piece.drawCircle(g);
-                clickSpace.setPlayer(2);
-                clickSpace.setBlank(false);
-                row = getRow(xMove);
-                col = getCol(yMove);
-                compBoard.setPiece(row, col, clickSpace);
+                g.setColor(Color.white);
+                g.fillOval(xMove,yMove,30,30);
+                if (xMove <= 332)
+                    xMove = xMove + 166;
+                g.setColor(Color.orange);
+                g.fillOval(xMove,yMove,30,30);
             }
-            playerNum++;
-        }
-        /*if (compBoard.checkWin())
-        {
-            //exit
-        }
-        */  
-       
+            else if (move == 3) //Moves cursor down 1 space
+            {
+                g.setColor(Color.white);
+                g.fillOval(xMove,yMove,30,30);
+                if (yMove >= 166)
+                    yMove = yMove - 166;
+                g.setColor(Color.orange);
+                g.fillOval(xMove,yMove,30,30);
+            }
+            else if (move == 4) //Moves cursor up 1 space
+            {
+                g.setColor(Color.white);
+                g.fillOval(xMove,yMove,30,30);
+                if (yMove <= 332)
+                    yMove = yMove + 166;
+                g.setColor(Color.orange);
+                g.fillOval(xMove,yMove,30,30);
+                //pieceMaintain(g);
+            }
+            else if (move == 5) // Places a piece (circle for first player & cross for second player)
+            {
+                g.setColor(Color.black);
+                if (playerNum%2 == 0)
+                {
+                    row = getRow(xMove);
+                    col = getCol(yMove);
+                    if(compBoard.isPlayer(row,col) != 2)
+                    {
+                        piece.drawCross(g);
+                        clickSpace.setPlayer(1);
+                        clickSpace.setBlank(false);
+                        compBoard.setPiece(row, col, clickSpace);
+                    }
+                }
+                else
+                {
+                    row = getRow(xMove);
+                    col = getCol(yMove);
+                    if(compBoard.isPlayer(row,col) != 1)
+                    {
+                        piece.drawCircle(g);
+                        clickSpace.setPlayer(2);
+                        clickSpace.setBlank(false);
+                        compBoard.setPiece(row, col, clickSpace);
+                    }
+                }
+                playerNum++;
+            }
+//             if (compBoard.checkWin())
+//             {
+//                 win = true;
+//             }
+        //}
     }
+    
+//     public void pieceMaintain(Graphics g)
+//     {
+//         for(int r = 0; r<3; r++)
+//         {
+//             for (int c = 0; c<3;c++)
+//             {
+//                 if(compBoard.isPlayer(r,c) == 1)
+//                 {
+//                     piece.drawCross(g);
+//                 }
+//                 else if(compBoard.isPlayer(r,c) == 2)
+//                 {
+//                     piece.drawCircle(g);
+//                 }
+//             }
+//         }
+//     }
     
     public int getXPos()
     {
